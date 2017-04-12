@@ -2,7 +2,25 @@
 function addItem(text_inp) {
 	if (!text_inp)
 		return;
-	$('#main .tasks_wording .ulist').append('<li class="new">'+ text_inp +'</li>');
+		$('#main .tasks_wording .ulist').append('<li class="new">'+ text_inp +'</li>');
+}
+function jsonTohtml(){
+	var items = [];
+	$('.ulist li').each(function(){
+
+		if ($(this).hasClass('new')){
+			items.push({ title: $(this).text(), done: false});
+		} 
+		else {
+			if ($(this).hasClass('done')) {
+				items.push({ title: $(this).text(), done: true});
+			}
+		
+		}
+		
+	});
+	$.post('/api/todos/new/',items);
+	return items;
 }
 
 // triggers when an item is clicked
@@ -12,20 +30,21 @@ function addItem(text_inp) {
 $(document).on('click', '#main .tasks_wording .ulist li', function(){
 	if ($(this).hasClass('done')) {
 		mark_undone(this);
+		jsonTohtml();
 	}
 	else {
 		mark_done(this);
+		jsonTohtml();
 	}
 });
-
 
 
 $('#main .task_input .btn_add').click(function(){
 	var $txt_input = $(this).parents('.task_input').find('.text_input');
 	addItem($txt_input.val());
 	$txt_input.val('');
+	jsonTohtml();
 });
-
 
 $('#main .task_input').keypress(function(e){
 
@@ -33,20 +52,22 @@ $('#main .task_input').keypress(function(e){
 		// enter
 		var $txt_input = $(this).find('.text_input');
 		addItem($txt_input.val());
+		console.log('post has been successful');
 		$txt_input.val('');
 	}
 });
 
 $(document).on('click', '#main .task_clear .clear_btn', function(){
 	clear_Done();
+	jsonTohtml();
 });
 
 function mark_done(el){
-	$(el).removeClass('new').addClass('done');
+		$(el).removeClass('new').addClass('done');
 }
 
 function mark_undone(el){
-	$(el).removeClass('done').addClass('new');
+		$(el).removeClass('done').addClass('new');
 }
 function clear_Done(){
 	var $done_Count = $('#main .tasks_wording .ulist .done').length;

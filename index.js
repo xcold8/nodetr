@@ -17,7 +17,7 @@ app.get('/', function (req, res){
 });
 
 app.get('/api/todos', function (req, res) {
-	res.send(JSON.stringify(json1));
+	res.send(json1);
 });
 
 app.listen(3000, function (){

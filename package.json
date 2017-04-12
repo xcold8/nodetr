@@ -1,0 +1,26 @@
+{
+  "name": "nodetr",
+  "version": "1.0.0",
+  "description": "training purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xcold8/nodetr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xcold8/nodetr/issues"
+  },
+  "homepage": "https://github.com/xcold8/nodetr#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "jsdom": "^9.12.0",
+    "mongodb": "^2.2.25"
+  },
+  "devDependencies": {}
+}

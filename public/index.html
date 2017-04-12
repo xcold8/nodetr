@@ -4,12 +4,12 @@
 	<script src = "http://localhost:3000/js/jquery.min.js"></script>
 	<script src = "http://localhost:3000/js/Template.min.js"></script>
 	<meta charset="UTF-8">
-	<title>Media Player</title>
+	<title>Tasky</title>
 	<link rel="stylesheet" href="css/htstyle.css">
 </head>
 <body>
-	<script type="text/html" id="tmpl">
-     	<li data-content="title"></li>
+	<script type="text/html" id="templ">
+     	<li class="new" data-content="title"></li>
 	</script>
 
 	<div id="main">
@@ -25,7 +25,6 @@
 		<div class="task_input">
 			<input class="text_input" type="text" placeholder="Add new task">
 			<input class="btn_add" type="button" value="Add" />
-			<input class="json_add" type="button" value="JSON" />
 		</div>
 		<div class="task_clear">
 			<input class="clear_btn" type="button" value="Clear done tasks">
@@ -40,15 +39,8 @@
 		$.get('http://127.0.0.1:3000/api/todos', function(data){
 			console.log(data);
 
-			$('.ulist').loadTemplate($('#tmpl'), data);
+			$('.ulist').loadTemplate($('#templ'), data);
 
-		});
-			
-			$('#main .task_input .json_add').click(function(){
-			$.get('/api/todos', function(cdata){
-				console.log(JSON.parse(cdata));
-				$.post('/api/todos/new', cdata);
-			});
 		});
 
 			/* $('#main .task_input .json_add').click(function(){
