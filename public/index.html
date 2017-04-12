@@ -43,13 +43,14 @@
 			$('.ulist').loadTemplate($('#tmpl'), data);
 
 		});
+			
+			$('#main .task_input .json_add').click(function(){
+			$.get('/api/todos', function(cdata){
+				console.log(JSON.parse(cdata));
+				$.post('/api/todos/new', cdata);
+			});
+		});
 
-		$('#main .task_input .json_add').click(function)(){
-			$.get('/api/todos', function(data){
-				jData = JSON.stringify(data);
-				console.log(jData);
-			}
-		}
 			/* $('#main .task_input .json_add').click(function(){
 				console.log(arr);
 				var tlist = [];
