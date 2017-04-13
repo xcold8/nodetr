@@ -11,6 +11,9 @@
 	<script type="text/html" id="templ">
      	<li class="new" data-content="title"></li>
 	</script>
+	<script type="text/html" id="tmpl">
+     	<li class="done" data-content="title"></li>
+	</script>
 
 	<div id="main">
 
@@ -37,9 +40,14 @@
 	$(document).ready(function(){
 		
 		$.get('http://127.0.0.1:3000/api/todos', function(data){
-			console.log(data);
-
-			$('.ulist').loadTemplate($('#templ'), data);
+			for (var i = 0; i < data.length; i++){
+				if (data[i].done == false){
+					$('.ulist').append('<li class = new>'+data[i].title+'</li>');
+				}
+				else {
+					$('.ulist').append('<li class = done>'+data[i].title+'</li>');
+					}
+				}
 
 		});
 

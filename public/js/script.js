@@ -19,7 +19,7 @@ function jsonTohtml(){
 		}
 		
 	});
-	$.post('/api/todos/new/',items);
+	$.post('/api/todos/new/',JSON.stringify(items));
 	return items;
 }
 
@@ -52,7 +52,7 @@ $('#main .task_input').keypress(function(e){
 		// enter
 		var $txt_input = $(this).find('.text_input');
 		addItem($txt_input.val());
-		console.log('post has been successful');
+		jsonTohtml();
 		$txt_input.val('');
 	}
 });
