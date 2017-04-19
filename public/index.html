@@ -39,9 +39,10 @@
 
 	$(document).ready(function(){
 		
-		/*$.get('http://127.0.0.1:3000/api/todos', function(data){
+		$.get('/api/todos', function(data){
+			console.log(data);
 			for (var i = 0; i < data.length; i++){
-				if (data[i].done == false){
+				if (data[i].done === false){
 					$('.ulist').append('<li class = new>'+data[i].title+'</li>');
 				}
 				else {

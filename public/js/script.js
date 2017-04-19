@@ -23,8 +23,6 @@ function jsonTohtml(){
 		}
 		
 	});
-	console.log(JSON.stringify(items));
-	// $.post('/api/todos/new/', {'task': JSON.stringify(items)});
 	
 	var data = { updated_tasks: items };
 	
@@ -33,7 +31,7 @@ function jsonTohtml(){
 	    type: 'post', 
 	    contentType: 'application/json; charset=utf-8', 
 	    data: JSON.stringify(data)
-	})
+	});
 
 
 	return items;
@@ -46,11 +44,9 @@ function jsonTohtml(){
 $(document).on('click', '#main .tasks_wording .ulist li', function(){
 	if ($(this).hasClass('done')) {
 		mark_undone(this);
-		jsonTohtml();
 	}
 	else {
 		mark_done(this);
-		jsonTohtml();
 	}
 });
 
@@ -80,10 +76,12 @@ $(document).on('click', '#main .task_clear .clear_btn', function(){
 
 function mark_done(el){
 		$(el).removeClass('new').addClass('done');
+		jsonTohtml();
 }
 
 function mark_undone(el){
 		$(el).removeClass('done').addClass('new');
+		jsonTohtml();
 }
 function clear_Done(){
 	var $done_Count = $('#main .tasks_wording .ulist .done').length;
