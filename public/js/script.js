@@ -9,17 +9,22 @@ function jsonTohtml(){
 	$('.ulist li').each(function(){
 
 		if ($(this).hasClass('new')){
-			items.push({ title: $(this).text(), done: false});
+			items.push({ 
+				title: $(this).text(), 
+				done:false});
 		} 
 		else {
 			if ($(this).hasClass('done')) {
-				items.push({ title: $(this).text(), done: true});
+				items.push({ 
+				title: $(this).text(), 
+				done:true});
 			}
 		
 		}
 		
 	});
-	$.post('/api/todos/new/',JSON.stringify(items));
+	console.log(JSON.stringify(items));
+	$.post('/api/todos/new/', {'task': JSON.stringify(items)});
 	return items;
 }
 
