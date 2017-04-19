@@ -24,7 +24,18 @@ function jsonTohtml(){
 		
 	});
 	console.log(JSON.stringify(items));
-	$.post('/api/todos/new/', {'task': JSON.stringify(items)});
+	// $.post('/api/todos/new/', {'task': JSON.stringify(items)});
+	
+	var data = { updated_tasks: items };
+	
+	$.ajax({
+	    url: '/api/todos/new/', 
+	    type: 'post', 
+	    contentType: 'application/json; charset=utf-8', 
+	    data: JSON.stringify(data)
+	})
+
+
 	return items;
 }
 
