@@ -1,84 +1,33 @@
 <!doctype html>
-<html>
-<head>
-	<script src = "http://localhost:3000/js/jquery.min.js"></script>
-	<script src = "http://localhost:3000/js/Template.min.js"></script>
-	<meta charset="UTF-8">
-	<title>Tasky</title>
-	<link rel="stylesheet" href="css/htstyle.css">
-</head>
-<body>
-	<script type="text/html" id="templ">
-     	<li class="new" data-content="title"></li>
-	</script>
-	<script type="text/html" id="tmpl">
-     	<li class="done" data-content="title"></li>
-	</script>
-
-	<div id="main">
-
-		<div class="top_container">
-			<h1>Tasky</h1>
+	<html>
+	<head>
+		<script src = "http://localhost:3000/js/jquery.min.js"></script>
+  		<link rel="stylesheet" type="text/css" href="https://trafficbalance.io/static/semantic/dist/semantic.min.css">
+	</head>
+	<body>
+		<div class="ui form success">
+  			<div class="field">
+    			<label>E-mail</label>
+    			<input type="email" placeholder="email@example.com">
+  			</div>
+  			<div class="ui success message">
+    			<div class="header">Sign-in</div>
+    				<p>Enter your email address to sign-in</p>
+  			</div>
+  			<div class="ui submit button">Login</div>
+   			<div class="ui loglout button">Logout</div>
 		</div>
-		
-		<div class="tasks_wording">
-				<ul class="ulist">
-				</ul>
-		</div>
-		<div class="task_input">
-			<input class="text_input" type="text" placeholder="Add new task">
-			<input class="btn_add" type="button" value="Add" />
-		</div>
-		<div class="task_clear">
-			<input class="clear_btn" type="button" value="Clear done tasks">
-		</div>
-
-	</div>	
-	<script src="http://localhost:3000/js/script.js"></script>
-	<script type="text/javascript">
-
-	$(document).ready(function(){
-		
-		$.get('/api/todos', function(data){
-			console.log(data);
-			for (var i = 0; i < data.length; i++){
-				if (data[i].done === false){
-					$('.ulist').append('<li class = new>'+data[i].title+'</li>');
-				}
-				else {
-					$('.ulist').append('<li class = done>'+data[i].title+'</li>');
-					}
-				}
+<script>
+$(document).ready(function(){
+	function emaiLogin(){
+	}
+	$('.ui.submit.button').click(function(){
+		var email = { email: $(this).parents('.ui.form.success').find('input').val(), tasks:[] };
+		$.post('/login', email, function(req, res){
 
 		});
-
-			/* $('#main .task_input .json_add').click(function(){
-				console.log(arr);
-				var tlist = [];
-				 $('#main .ulist li').each(function(){
-				 		var title = $(this).text();
-				 		var done = false;
-				 		if ( $(this).hasClass('done') ){
-							done = true;
-				 			} else {
-				 				done = false;
-				 	}
-				 item = {};
-				 item.title = title;
-				 item.done = done;
-
-				 tlist.push(item);
-				 console.log(tlist);
-
-
-
-		      });	
-		
-			});
-		*/
-
 	});
-
+});
 </script>
 </body>
 </html>
