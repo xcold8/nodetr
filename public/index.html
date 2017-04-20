@@ -23,11 +23,23 @@ $(document).ready(function(){
 	}
 	$('.ui.submit.button').click(function(){
 		var email = { email: $(this).parents('.ui.form.success').find('input').val(), tasks:[] };
-		$.post('/login', email, function(req, res){
-
+		$.ajax({
+	    	url: '/login', 
+	    	type: 'post', 
+	    	contentType: 'application/json; charset=utf-8', 
+	    	data: JSON.stringify(email)
+		}).done(function(data, statusText, xhr){
+			 var status = xhr.status;                //200
+  			 var head = xhr.getAllResponseHeaders(); //Detail header info
+  			 if (status == 200){
+  			 	window.location.href = '/todos';
+  			 }
+  			 else {
+  			 	alert('failed to redirect');
+  			 }
+			});
 		});
 	});
-});
 </script>
 </body>
 </html>

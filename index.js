@@ -5,8 +5,9 @@ var connect = require('connect');
 var http = require('http');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var Task = require('./Tasks_models');
-var User = require('./Tasks_models');
+var models = require('./models');
+var Task = models.Task;
+var User = models.User;
 
 
 // parse urlencoded request bodies into req.body
@@ -22,11 +23,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
 	res.sendFile('/public/index.html');
 });
+app.get('/todos', function(req, res){
+	res.sendFile('/public/todos.html');
+});
 
 app.post('/login', jsonParser, function(req,res){
-	console.log(req.body);
-	User.create(req.body);
+	console.log(res.statusCode);
+	User.create(req.body, function (err, data){
+		if (err){
+
+		}
+	});
 	res.sendStatus(200);
+
 });
 
 app.get('/api/todos', function(req, res) {
