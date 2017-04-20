@@ -5,8 +5,8 @@ var connect = require('connect');
 var http = require('http');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var Task = require('./Tasks_model');
-var User = require('./Tasks_model');
+var Task = require('./Tasks_models');
+var User = require('./Tasks_models');
 
 
 // parse urlencoded request bodies into req.body

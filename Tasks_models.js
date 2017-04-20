@@ -13,7 +13,7 @@ var User = mongoose.model('users', usersSchema);
 var tasksDb = 'mongodb://xcold8:randompassword@ds161640.mlab.com:61640/tasky';
 mongoose.connect(tasksDb);
 
-module.exports = [
-	mongoose.model('User', usersSchema),
-	mongoose.model('Task', tasksSchema)
-];
+module.exports = {
+	User: mongoose.model('User', usersSchema),
+	Task: mongoose.model('Task', tasksSchema)
+};
