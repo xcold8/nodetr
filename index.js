@@ -38,20 +38,22 @@ app.listen(3000, function (){
 	console.log('Listening on port 3000');
 });
 app.post('/api/todos/new', jsonParser, function(req, res){
-
-	Task.remove({}, function (err) {
-  		if (err) return handleError(err);
-  		else {
-  			console.log('deleted successfully');	
-  		}
-  // removed!
+		Task.remove({}, function (err){
+		if (err) return handleError(err);
+		else { 
+			console.log('deleted successfully');
+		}	
 });
-	Task.create(req.body.updated_tasks, function (err, task){
-		if(err){
-			console.log("Error has been occured, could not save to database");
-		}
-		else {
-	 		console.log(task);
-		}
-	 });
+	var jdata = req.body.updated_tasks;
+	for (var i=0; i < jdata.length; i++){
+		Task.create(jdata[i], function (err,task){
+			if(err){
+				console.log("Error has been occured, could not save to database");
+			}
+			else {
+	 			console.log(task);
+			}
+	});
+
+   }
 });
