@@ -1,9 +1,3 @@
-// adds a string to the list as an item
-function addItem(text_inp) {
-	if (!text_inp)
-		return;
-		$('#main .tasks_wording .ulist').append('<li class="new">'+ text_inp +'</li>');
-}
 function jsonTohtml(){
 	var items = [];
 	$('.ulist li').each(function(){
@@ -36,6 +30,13 @@ function jsonTohtml(){
 
 	return items;
 }
+// adds a string to the list as an item
+function addItem(text_inp) {
+	if (!text_inp)
+		return;
+		$('#main .tasks_wording .ulist').append('<li class="new">'+ text_inp +'</li>');
+		jsonTohtml();
+}
 
 // triggers when an item is clicked
 
@@ -44,9 +45,11 @@ function jsonTohtml(){
 $(document).on('click', '#main .tasks_wording .ulist li', function(){
 	if ($(this).hasClass('done')) {
 		mark_undone(this);
+		jsonTohtml();
 	}
 	else {
 		mark_done(this);
+		jsonTohtml();
 	}
 });
 
@@ -76,12 +79,11 @@ $(document).on('click', '#main .task_clear .clear_btn', function(){
 
 function mark_done(el){
 		$(el).removeClass('new').addClass('done');
-		jsonTohtml();
+		
 }
 
 function mark_undone(el){
 		$(el).removeClass('done').addClass('new');
-		jsonTohtml();
 }
 function clear_Done(){
 	var $done_Count = $('#main .tasks_wording .ulist .done').length;

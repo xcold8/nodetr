@@ -39,7 +39,13 @@ app.listen(3000, function (){
 });
 app.post('/api/todos/new', jsonParser, function(req, res){
 
-	Task.remove({});
+	Task.remove({}, function (err) {
+  		if (err) return handleError(err);
+  		else {
+  			console.log('deleted successfully');	
+  		}
+  // removed!
+});
 	Task.create(req.body.updated_tasks, function (err, task){
 		if(err){
 			console.log("Error has been occured, could not save to database");
