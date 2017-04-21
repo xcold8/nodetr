@@ -28,10 +28,10 @@ app.get('/todos', function(req, res){
 });
 
 app.post('/login', jsonParser, function(req,res){
-	console.log(res.statusCode);
 	User.create(req.body, function (err, data){
-		if (err){
-
+		if (err){ console.log('error occured');
+		} else {
+			console.log(data);
 		}
 	});
 	res.sendStatus(200);
@@ -39,13 +39,16 @@ app.post('/login', jsonParser, function(req,res){
 });
 
 app.get('/api/todos', function(req, res) {
-	Task.find({})
+	User.find({email: req.body.email})
 	.exec(function(err, results) {
 		if(err){
 			res.send('error occured');
 		}
 		else {
 			res.send(results);
+
+			return results;
+
 		}
 
 	});
@@ -55,15 +58,17 @@ app.listen(3000, function (){
 	console.log('Listening on port 3000');
 });
 app.post('/api/todos/new', jsonParser, function(req, res){
-		Task.remove({}, function (err){
+		User.remove({ tasks: [{}]}, function (err){
 		if (err) return handleError(err);
 		else { 
 			console.log('deleted successfully');
 		}	
 });
+	var userEmail = req.body.email;
+	console.log(userEmail);
 	var jdata = req.body.updated_tasks;
 	for (var i=0; i < jdata.length; i++){
-		Task.create(jdata[i], function (err,task){
+		User.create({user: userEmail, tasks:[jdata[i]]}, function (err,task){
 			if(err){
 				console.log("Error has been occured, could not save to database");
 			}
