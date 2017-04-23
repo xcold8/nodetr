@@ -16,6 +16,9 @@
 	</script>
 
 	<div id="main">
+		<div class="logout">
+			<input class="btnl" type="button" value="Logout">
+		</div>
 
 		<div class="top_container">
 			<h1>Tasky</h1>
@@ -39,7 +42,6 @@
 	
 	$(document).ready(function(){
 		var jsonUrl = '/api'+(location.pathname+location.search);
-		console.log(jsonUrl);
 		$.get(jsonUrl, function(data){
 			for (var i = 0; i < data.length; i++){
 				for (var j = 0; j < data[i].tasks.length; j++){

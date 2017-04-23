@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/xcold8/nodetr#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
     "jquery": "^3.2.1",
     "jsdom": "^9.12.0",

@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var app = express();
+var cookieParser = require('cookie-parser');
 var connect = require('connect');
 var http = require('http');
 var mongoose = require('mongoose');
@@ -15,13 +16,18 @@ var bodyParser = require('body-parser');
 
 // create application/json parser
 var jsonParser = bodyParser.json();
-
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
-	res.sendFile('/public/index.html');
+	if (req.headers.cookie){
+		res.redirect('/todos?'+req.headers.cookie);
+	} else { 
+		if (!req.headers.cookie)
+		res.sendFile(__dirname +'/public/index.html');
+	}	
 });
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/todos', function(req, res){
 	var userEmail = req.query.email;
 	res.sendFile(__dirname + '/public/todos.html');

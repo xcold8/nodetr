@@ -45,11 +45,9 @@ function addItem(text_inp) {
 $(document).on('click', '#main .tasks_wording .ulist li', function(){
 	if ($(this).hasClass('done')) {
 		mark_undone(this);
-		jsonTohtml();
 	}
 	else {
 		mark_done(this);
-		jsonTohtml();
 	}
 });
 
@@ -75,14 +73,19 @@ $(document).on('click', '#main .task_clear .clear_btn', function(){
 	clear_Done();
 	jsonTohtml();
 });
-
+$(document).on('click', '#main .logout .btnl', function(){
+	deleteAllCookies();
+	window.location.assign('/');
+});
 function mark_done(el){
 		$(el).removeClass('new').addClass('done');
+		jsonTohtml();
 		
 }
 
 function mark_undone(el){
 		$(el).removeClass('done').addClass('new');
+		jsonTohtml();
 }
 function clear_Done(){
 	var $done_Count = $('#main .tasks_wording .ulist .done').length;
@@ -94,3 +97,13 @@ function clear_Done(){
 
 		 }
 	}
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
