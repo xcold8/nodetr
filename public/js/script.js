@@ -1,4 +1,5 @@
 function jsonTohtml(){
+	var userEmail = window.location.search.substr(7);
 	var items = [];
 	$('.ulist li').each(function(){
 
@@ -17,8 +18,7 @@ function jsonTohtml(){
 		}
 		
 	});
-	
-	var data = { updated_tasks: items };
+	var data = {email: userEmail ,updated_tasks: items };
 	
 	$.ajax({
 	    url: '/api/todos/new/', 
@@ -67,7 +67,6 @@ $('#main .task_input').keypress(function(e){
 		// enter
 		var $txt_input = $(this).find('.text_input');
 		addItem($txt_input.val());
-		jsonTohtml();
 		$txt_input.val('');
 	}
 });

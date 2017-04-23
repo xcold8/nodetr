@@ -19,20 +19,22 @@
 		</div>
 <script>
 $(document).ready(function(){
-	function emaiLogin(){
+	function getUserTasks(param){
+
 	}
 	$('.ui.submit.button').click(function(){
-		var email = { email: $(this).parents('.ui.form.success').find('input').val(), tasks:[] };
+		var userInfo = { email: $(this).parents('.ui.form.success').find('input').val(), tasks:[] };
 		$.ajax({
 	    	url: '/login', 
 	    	type: 'post', 
 	    	contentType: 'application/json; charset=utf-8', 
-	    	data: JSON.stringify(email)
+	    	data: JSON.stringify(userInfo)
 		}).done(function(data, statusText, xhr){
 			 var status = xhr.status;                //200
   			 var head = xhr.getAllResponseHeaders(); //Detail header info
   			 if (status == 200){
-  			 	window.location.assign('http://127.0.0.1:3000/todos.html');
+  			 	window.location.assign('http://127.0.0.1:3000/todos?e='+userInfo.email);
+  			 	getUserTasks(email);
   			 }
   			 else {
   			 	alert('failed to redirect');

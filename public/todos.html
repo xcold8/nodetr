@@ -36,22 +36,27 @@
 	</div>	
 	<script src="http://localhost:3000/js/script.js"></script>
 	<script type="text/javascript">
-
+	
 	$(document).ready(function(){
-		
-		$.get('/api/todos', function(data){
-			console.log(data);
+		var jsonUrl = '/api'+(location.pathname+location.search);
+		console.log(jsonUrl);
+		$.get(jsonUrl, function(data){
 			for (var i = 0; i < data.length; i++){
-				if (data[i].done === false){
-					$('.ulist').append('<li class = new>'+data[i].title+'</li>');
-				}
-				else {
-					$('.ulist').append('<li class = done>'+data[i].title+'</li>');
+				for (var j = 0; j < data[i].tasks.length; j++){
+					if (data[i].tasks.length == []){
+						return;
+					} else {
+							if (data[i].tasks[j].done === false){
+								$('.ulist').append('<li class = new>'+data[i].tasks[j].title+'</li>');
+							}
+							else {
+								$('.ulist').append('<li class = done>'+data[i].tasks[j].title+'</li>');
+							}
+
+						}
 					}
 				}
-
-		});
-
+			});
 			/* $('#main .task_input .json_add').click(function(){
 				console.log(arr);
 				var tlist = [];
